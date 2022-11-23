@@ -15,6 +15,7 @@ function main(): void {
             "CLI to convert CDS models to Typescript interfaces and enumerations"
         )
         .option("-c, --cds <file.cds>", "CDS file to convert")
+        .option("-f, --folder <folder>", "Folder with files to convert")
         .option("-o, --output <file.ts>", "Output location for the *.ts file")
         .option("-p, --prefix <I>", "Interface prefix", "")
         .option(
@@ -33,6 +34,7 @@ function main(): void {
             "-s, --sort",
             "Flag, whether to sort outputted source code or not"
         )
+        .option("-w, --watch", "Watch folder for new files and changes")
         .parse(process.argv);
 
     if (!process.argv.slice(2).length) {

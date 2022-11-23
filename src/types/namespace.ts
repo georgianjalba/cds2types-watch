@@ -159,10 +159,10 @@ export class Namespace {
             t.toType(otherEntities)
         );
 
-        let namespaceOrSource: morph.SourceFile | morph.NamespaceDeclaration =
+        let namespaceOrSource: morph.SourceFile | morph.ModuleDeclaration =
             source;
         if (this.name && this.name !== "") {
-            namespaceOrSource = source.addNamespace({
+            namespaceOrSource = source.addModule({
                 name: this.name,
                 isExported: true,
             });
@@ -190,7 +190,7 @@ export class Namespace {
      */
     private addActionFuncDeclarations(
         actionFuncDecls: IActionFunctionDeclarationStructure[],
-        source: morph.SourceFile | morph.NamespaceDeclaration
+        source: morph.SourceFile | morph.ModuleDeclaration
     ): void {
         actionFuncDecls.forEach((afd) => {
             source.addEnum(afd.enumDeclarationStructure);
@@ -214,7 +214,7 @@ export class Namespace {
      */
     private addEnumDeclarations(
         enumDecls: morph.EnumDeclarationStructure[],
-        source: morph.SourceFile | morph.NamespaceDeclaration
+        source: morph.SourceFile | morph.ModuleDeclaration
     ): void {
         enumDecls.forEach((ed) => {
             if (ed.members && !_.isEmpty(ed.members)) {
@@ -233,7 +233,7 @@ export class Namespace {
      */
     private addEntityDeclarations(
         entityDecls: IEntityDeclarationStructure[],
-        source: morph.SourceFile | morph.NamespaceDeclaration
+        source: morph.SourceFile | morph.ModuleDeclaration
     ): void {
         entityDecls.forEach((ed) => {
             if (!_.isEmpty(ed.enumDeclarationStructures)) {
@@ -243,7 +243,7 @@ export class Namespace {
             source.addInterface(ed.interfaceDeclarationStructure);
 
             if (!_.isEmpty(ed.actionFuncStructures)) {
-                const actionsNamespace = source.addNamespace({
+                const actionsNamespace = source.addModule({
                     name: `${ed.interfaceDeclarationStructure.name}.actions`,
                     isExported: true,
                 });
@@ -266,7 +266,7 @@ export class Namespace {
      */
     private addTypeAliasDeclarations(
         typeAliasDecls: (morph.TypeAliasDeclarationStructure | undefined)[],
-        source: morph.SourceFile | morph.NamespaceDeclaration
+        source: morph.SourceFile | morph.ModuleDeclaration
     ): void {
         typeAliasDecls.forEach((tad) => {
             if (tad !== undefined) {

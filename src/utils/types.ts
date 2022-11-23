@@ -155,6 +155,7 @@ export function isActionFunction(
  */
 export interface IOptions {
     cds: string;
+    folder: string;
     output: string;
     prefix: string;
     json: boolean;
@@ -162,4 +163,5 @@ export interface IOptions {
     version: string;
     format: boolean;
     sort: boolean;
+    watch: boolean;
 }
